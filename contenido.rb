@@ -20,7 +20,7 @@ def head()
         
             <title>MARS PHOTOS</title>
         </head>
-        <body style='margin:0;'>
+        <body style='margin:0;' class= 'bg-dark text-white'>
             <h1 class='text-center' >MARS PHOTOS</h1>\n"
     return head
 end
