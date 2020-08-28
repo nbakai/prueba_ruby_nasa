@@ -24,6 +24,22 @@ def head()
             <h1 class='text-center' >MARS PHOTOS</h1>\n"
     return head
 end
+def photos_count(a_url, a_key)
+    data = request(a_url, a_key)
+    mars = data["photos"]
+    cont = 0
+    contador = ''
+        mars.each do |k,v| 
+            mars.select do |name, value| 
+                value.push if name['name']
+            contador = ""
+            end 
+            cont += 1 if k["img_src"]
+            contador = "        <p>Cantidad de imágenes es #{cont}</p>\n"
+        end
+        
+       return contador
+end
 
 def main(a_url, a_key)
     data = request(a_url, a_key)
