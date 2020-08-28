@@ -20,17 +20,17 @@ def head()
         
             <title>MARS PHOTOS</title>
         </head>
-        <body>
+        <body style='margin:0;'>
             <h1 class='text-center' >MARS PHOTOS</h1>\n"
     return head
 end
 def photos_count(a_url, a_key)
     data = request(a_url, a_key)
     mars = data["photos"]
+    
     cont_f = 0
     cont_r = 0
     cont_mast = 0
-    cont_chem = 0
     cont_chem = 0
     cont_mahli = 0
     cont_mardi = 0
@@ -40,20 +40,22 @@ def photos_count(a_url, a_key)
             cont_f += 1 if k["img_src"] && k["camera"]["name"] == "FHAZ"
             cont_r += 1 if k["img_src"] && k["camera"]["name"] == "RHAZ"
             cont_mast += 1 if k["img_src"] && k["camera"]["name"] == "MAST"
-            cont_chem += 1 if k["img_src"] && k["camera"]["name"] == "CHEM"
+            cont_chem += 1 if k["img_src"] && k["camera"]["name"] == "CHEMCAM"
             cont_mahli += 1 if k["img_src"] && k["camera"]["name"] == "MAHLI"
             cont_mardi += 1 if k["img_src"] && k["camera"]["name"] == "MARDI"
             cont_navcam += 1 if k["img_src"] && k["camera"]["name"] == "NAVCAM"
             
         end
-        contador += "            <p>Cantidad de imágenes de la cámara FHAZ #{cont_f}</p>\n"
-        contador += "            <p>Cantidad de imágenes de la cámara RHAZ #{cont_r}</p>\n"
-        contador += "            <p>Cantidad de imágenes de la cámara MAST #{cont_mast}</p>\n"
-        contador += "            <p>Cantidad de imágenes de la cámara CHEM #{cont_chem}</p>\n"
-        contador += "            <p>Cantidad de imágenes de la cámara MAHLI #{cont_mahli}</p>\n"
-        contador += "            <p>Cantidad de imágenes de la cámara MARDI #{cont_mardi}</p>\n"
-        contador += "            <p>Cantidad de imágenes de la cámara NAVCAM #{cont_navcam}</p>\n"
-       return contador  
+        contador += "     <ul>"
+        contador += "         <li><p>Cantidad de imágenes de la cámara FHAZ #{cont_f}</p> </li>\n"
+        contador += "         <li><p>Cantidad de imágenes de la cámara RHAZ #{cont_r}</p> </li>\n"
+        contador += "         <li><p>Cantidad de imágenes de la cámara MAST #{cont_mast}</p></li>\n"
+        contador += "         <li><p>Cantidad de imágenes de la cámara CHEMCAM #{cont_chem}</p></li>\n"
+        contador += "         <li><p>Cantidad de imágenes de la cámara MAHLI #{cont_mahli}</p></li>\n"
+        contador += "         <li><p>Cantidad de imágenes de la cámara MARDI #{cont_mardi}</p></li>\n"
+        contador += "         <li><p>Cantidad de imágenes de la cámara NAVCAM #{cont_navcam}</p></li>\n"
+        contador += "       </ul>\n"
+       return contador 
 end
 
 
