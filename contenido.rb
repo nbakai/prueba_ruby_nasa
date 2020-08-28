@@ -27,19 +27,35 @@ end
 def photos_count(a_url, a_key)
     data = request(a_url, a_key)
     mars = data["photos"]
-    cont = 0
+    cont_f = 0
+    cont_r = 0
+    cont_mast = 0
+    cont_chem = 0
+    cont_chem = 0
+    cont_mahli = 0
+    cont_mardi = 0
+    cont_navcam = 0
     contador = ''
         mars.each do |k,v| 
-            mars.select do |name, value| 
-                value.push if name['name']
-            contador = ""
-            end 
-            cont += 1 if k["img_src"]
-            contador = "        <p>Cantidad de imágenes es #{cont}</p>\n"
+            cont_f += 1 if k["img_src"] && k["camera"]["name"] == "FHAZ"
+            cont_r += 1 if k["img_src"] && k["camera"]["name"] == "RHAZ"
+            cont_mast += 1 if k["img_src"] && k["camera"]["name"] == "MAST"
+            cont_chem += 1 if k["img_src"] && k["camera"]["name"] == "CHEM"
+            cont_mahli += 1 if k["img_src"] && k["camera"]["name"] == "MAHLI"
+            cont_mardi += 1 if k["img_src"] && k["camera"]["name"] == "MARDI"
+            cont_navcam += 1 if k["img_src"] && k["camera"]["name"] == "NAVCAM"
+            
         end
-        
-       return contador
+        contador += "            <p>Cantidad de imágenes de la cámara FHAZ #{cont_f}</p>\n"
+        contador += "            <p>Cantidad de imágenes de la cámara RHAZ #{cont_r}</p>\n"
+        contador += "            <p>Cantidad de imágenes de la cámara MAST #{cont_mast}</p>\n"
+        contador += "            <p>Cantidad de imágenes de la cámara CHEM #{cont_chem}</p>\n"
+        contador += "            <p>Cantidad de imágenes de la cámara MAHLI #{cont_mahli}</p>\n"
+        contador += "            <p>Cantidad de imágenes de la cámara MARDI #{cont_mardi}</p>\n"
+        contador += "            <p>Cantidad de imágenes de la cámara NAVCAM #{cont_navcam}</p>\n"
+       return contador  
 end
+
 
 def main(a_url, a_key)
     data = request(a_url, a_key)
@@ -76,7 +92,7 @@ def foot
 end
 def build_web_page(api_url, api_key)
     
-    index = head() + main(api_url, api_key) + foot()
+    index = head() + photos_count(api_url, api_key) + main(api_url, api_key) + foot()
     return index
 end
 
